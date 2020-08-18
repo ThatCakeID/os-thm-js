@@ -29,26 +29,26 @@ function User(username, uid) {
 //     this.colorPrimaryCard = colorPrimaryCard;
 //     this.colorBackgroundCardImage = colorBackgroundCardImage;
 // }
-"[{\"colorPrimary\":\"#FFFFFF\",
-\"colorPrimaryDark\":\"#FFFFFF\",
-\"colorBackgroundText\":\"#000000\",
-\"colorBackground\":\"#FFFFFF\",
-\"colorButton\":\"#2196F3\",
-\"shadow\":\"1\",
-\"colorHint\":\"#2196F3\",
-\"colorRipple\":\"#2196F3\",
-\"colorPrimaryCardImage\":\"#000000\",
-\"version\":\"2\",
-\"colorPrimaryText\":\"#000000\",
-\"colorPrimaryImage\":\"#000000\",
-\"colorBackgroundImage\":\"#2196F3\",
-\"colorBackgroundCardText\":\"#000000\",
-\"statusbarIcon\":\"0\",
-\"colorBackgroundCard\":\"#FFFFFF\",
-\"colorButtonText\":\"#FFFFFF\",
-\"colorPrimaryCardText\":\"#000000\",
-\"colorPrimaryCard\":\"#FFFFFF\",
-\"colorBackgroundCardImage\":\"#000000\"}]"
+// "[{\"colorPrimary\":\"#FFFFFF\",
+// \"colorPrimaryDark\":\"#FFFFFF\",
+// \"colorBackgroundText\":\"#000000\",
+// \"colorBackground\":\"#FFFFFF\",
+// \"colorButton\":\"#2196F3\",
+// \"shadow\":\"1\",
+// \"colorHint\":\"#2196F3\",
+// \"colorRipple\":\"#2196F3\",
+// \"colorPrimaryCardImage\":\"#000000\",
+// \"version\":\"2\",
+// \"colorPrimaryText\":\"#000000\",
+// \"colorPrimaryImage\":\"#000000\",
+// \"colorBackgroundImage\":\"#2196F3\",
+// \"colorBackgroundCardText\":\"#000000\",
+// \"statusbarIcon\":\"0\",
+// \"colorBackgroundCard\":\"#FFFFFF\",
+// \"colorButtonText\":\"#FFFFFF\",
+// \"colorPrimaryCardText\":\"#000000\",
+// \"colorPrimaryCard\":\"#FFFFFF\",
+// \"colorBackgroundCardImage\":\"#000000\"}]"
 
 
 function Theme(author, title, info, user_uid, theme_data, osthm_version) {
