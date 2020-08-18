@@ -1,0 +1,25 @@
+{
+  "name": "os-thm",
+  "version": "1.0.0",
+  "description": "Open Source Theme for Javascript and Web",
+  "main": "os-thm-js.js",
+  "scripts": {
+    "test": "node os-thm-js.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThatCakeID/os-thm-js.git"
+  },
+  "keywords": [
+    "theme",
+    "opensource",
+    "library",
+    "online"
+  ],
+  "author": "Iyxan23, TeamWorksDEV",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ThatCakeID/os-thm-js/issues"
+  },
+  "homepage": "https://github.com/ThatCakeID/os-thm-js#readme"
+}
