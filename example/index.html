@@ -1,197 +1,217 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>os-thm example</title>
-    <link rel="stylesheet" href="./spinner.css">
-  </head>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>os-thm example</title>
+      <link rel="stylesheet" href="./spinner.css">
+    </head>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Ubuntu", sans-serif;
-      user-select: none;
-    }
-
-    html {
-      width: 100%;
-      height: 100%;
-    }
-
-    .box {
-      box-shadow: 2px 2px 3px 4px rgb(219, 219, 219);
-      margin: 1px;
-      padding: 5px;
-      width: fit-content;
-      border-radius: 10px;
-      max-width: 400px;
-      min-width: 100px;
-    }
-
-    .title {
-      font-weight: 700;
-      font-size: 20px;
-    }
-
-    .version {
-      font-weight: 300;
-      font-size: 15px;
-    }
-
-    .description {
-      font-size: 17px;
-      font-weight: 500;
-    }
-
-    .display-none {
-      display: none;
-    }
-
-    .box-image {
-      cursor: zoom-in;
-    }
-
-    .zoom {
-      flex-direction: column;
-    }
-
-    .zoom img {
-      width: 100%!important;
-      cursor: zoom-out!important;
-    }
-  </style>
-  <body style="margin-top: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-      <span class="box"><h1>THEMES</h1></span>
-      <svg style="margin-top: 20px;" class="spinner" id="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-      </svg>
-    <div style="margin-top: 20px;" class="display-none" id="root"></div>
-    <script>
-      function User(username, uid) {
-        this.username = username;
-        this.uid = uid;
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Ubuntu", sans-serif;
+        user-select: none;
+        transition: all 0.2s linear;
       }
 
-      // function ThemeData( colorPrimary, colorPrimaryDark, colorBackgroundText, colorBackground,
-      //                     colorButton, shadow, colorHint, colorRipple, colorPrimaryCardImage,
-      //                     version, colorPrimaryText, colorPrimaryImage, colorBackgroundImage,
-      //                     colorBackgroundCardText, statusbarIcon, colorBackgroundCard, colorButtonText,
-      //                     colorPrimaryCardText, colorPrimaryCard, colorBackgroundCardImage) {
-      //     this.colorPrimary = colorPrimary;
-      //     this.colorPrimaryDark = colorPrimaryDark;
-      //     this.colorBackgroundText = colorBackgroundText;
-      //     this.colorBackground = colorBackground;
-      //     this.colorButton = colorButton;
-      //     this.shadow = shadow;
-      //     this.colorHint = colorHint;
-      //     this.colorRipple = colorRipple;
-      //     this.colorPrimaryCardImage = colorPrimaryCardImage;
-      //     this.version = version;
-      //     this.colorPrimaryText = colorPrimaryText;
-      //     this.colorPrimaryImage = colorPrimaryImage;
-      //     this.colorBackgroundImage = colorBackgroundImage;
-      //     this.colorBackgroundCardText = colorBackgroundCardText;
-      //     this.statusbarIcon = statusbarIcon;
-      //     this.colorBackgroundCard = colorBackgroundCard;
-      //     this.colorButtonText = colorButtonText;
-      //     this.colorPrimaryCardText = colorPrimaryCardText;
-      //     this.colorPrimaryCard = colorPrimaryCard;
-      //     this.colorBackgroundCardImage = colorBackgroundCardImage;
-      // }
-      // "[{\"colorPrimary\":\"#FFFFFF\",
-      // \"colorPrimaryDark\":\"#FFFFFF\",
-      // \"colorBackgroundText\":\"#000000\",
-      // \"colorBackground\":\"#FFFFFF\",
-      // \"colorButton\":\"#2196F3\",
-      // \"shadow\":\"1\",
-      // \"colorHint\":\"#2196F3\",
-      // \"colorRipple\":\"#2196F3\",
-      // \"colorPrimaryCardImage\":\"#000000\",
-      // \"version\":\"2\",
-      // \"colorPrimaryText\":\"#000000\",
-      // \"colorPrimaryImage\":\"#000000\",
-      // \"colorBackgroundImage\":\"#2196F3\",
-      // \"colorBackgroundCardText\":\"#000000\",
-      // \"statusbarIcon\":\"0\",
-      // \"colorBackgroundCard\":\"#FFFFFF\",
-      // \"colorButtonText\":\"#FFFFFF\",
-      // \"colorPrimaryCardText\":\"#000000\",
-      // \"colorPrimaryCard\":\"#FFFFFF\",
-      // \"colorBackgroundCardImage\":\"#000000\"}]"
-
-      function Theme(author, title, info, user_uid, theme_data, osthm_version) {
-        this.author = new User(author, user_uid);
-        this.title = title;
-        this.info = info;
-        this.osthm_version = osthm_version;
-        this.theme_data = theme_data;
+      html {
+        width: 100%;
+        height: 100%;
       }
 
-      async function getThemes() {
-        return await fetch(
-          "https://teammusic-tw.firebaseio.com/upload/themes.json"
-        )
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            var themes = [];
-            for (key in data) {
-              let current_data = data[key];
-              let theme_data = JSON.parse(current_data["themesjson"]);
-              themes.push(
-                new Theme(
-                  current_data["themesauthor"],
-                  current_data["themesname"],
-                  current_data["themesinfo"],
-                  current_data["uid"],
-                  theme_data,
-                  current_data["os-thm-version"]
-                )
-              );
-            }
-            return themes;
-          });
+      .box {
+        box-shadow: 2px 2px 3px 4px rgb(219, 219, 219);
+        margin: 1px;
+        padding: 5px;
+        width: fit-content;
+        border-radius: 10px;
+        max-width: 400px;
+        min-width: 100px;
       }
 
-      getThemes().then((data) => {
-        var mainContainer = document.getElementById("root");
-        for (var i = 0; i < data.length; i++) {
-          var div = document.createElement("div");
-          div.innerHTML = '<div class="box" style="margin: 20px; padding: 10px; width: 250px;">' +
-            '<span id="box-image-'+ i +'" style="display: flex;  text-align: center; justify-content: flex-start; align-items: center;">' +
-              '<img onClick="zoom(' + i + ')"  class="box-image" style="border-radius: 15px;" src="./box-image.png" width="100px"  />' +
-              '<p class="title" style="margin-left: 15px;">'+ data[i].title +'</p>' +
-            '</span>' +
-            '<p class="description">'+ data[i].info +'</p>' +
-            '<p class="version">Version: '+ data[i].osthm_version +'</p>' +
-          '</div>';
-          mainContainer.appendChild(div);
-          setTimeout(() => {
-            document.getElementById('root').classList.remove('display-none');
-            document.getElementById('spinner').classList.add('display-none');
-          }, 1)          
+      .title {
+        font-weight: 700;
+        font-size: 20px;
+      }
+
+      .version {
+        font-weight: 300;
+        font-size: 15px;
+      }
+
+      .description {
+        font-size: 17px;
+        font-weight: 500;
+      }
+
+      .display-none {
+        display: none;
+      }
+
+      .box-image {
+        cursor: zoom-in;
+      }
+
+      .zoom {
+        flex-direction: column;
+      }
+
+      .zoom img {
+        width: 100%!important;
+        cursor: zoom-out!important;
+        border-radius: 0!important;
+      }
+    </style>
+    <body style="margin-top: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <span class="box"><h1>THEMES</h1></span>
+        <svg style="margin-top: 20px;" class="spinner" id="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+          <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+        </svg>
+      <div style="margin-top: 20px;" class="display-none" id="root"></div>
+      <div class="preview">
+        <h5>
+          Preview:
+        </h5>
+        <button id="button">Button</button>
+        <button id="button">Button</button>
+      </div>
+      <script>
+
+        function User(username, uid) {
+          this.username = username;
+          this.uid = uid;
         }
-      });
 
-      var zoomed;
+        // function ThemeData( colorPrimary, colorPrimaryDark, colorBackgroundText, colorBackground,
+        //                     colorButton, shadow, colorHint, colorRipple, colorPrimaryCardImage,
+        //                     version, colorPrimaryText, colorPrimaryImage, colorBackgroundImage,
+        //                     colorBackgroundCardText, statusbarIcon, colorBackgroundCard, colorButtonText,
+        //                     colorPrimaryCardText, colorPrimaryCard, colorBackgroundCardImage) {
+        //     this.colorPrimary = colorPrimary;
+        //     this.colorPrimaryDark = colorPrimaryDark;
+        //     this.colorBackgroundText = colorBackgroundText;
+        //     this.colorBackground = colorBackground;
+        //     this.colorButton = colorButton;
+        //     this.shadow = shadow;
+        //     this.colorHint = colorHint;
+        //     this.colorRipple = colorRipple;
+        //     this.colorPrimaryCardImage = colorPrimaryCardImage;
+        //     this.version = version;
+        //     this.colorPrimaryText = colorPrimaryText;
+        //     this.colorPrimaryImage = colorPrimaryImage;
+        //     this.colorBackgroundImage = colorBackgroundImage;
+        //     this.colorBackgroundCardText = colorBackgroundCardText;
+        //     this.statusbarIcon = statusbarIcon;
+        //     this.colorBackgroundCard = colorBackgroundCard;
+        //     this.colorButtonText = colorButtonText;
+        //     this.colorPrimaryCardText = colorPrimaryCardText;
+        //     this.colorPrimaryCard = colorPrimaryCard;
+        //     this.colorBackgroundCardImage = colorBackgroundCardImage;
+        // }
+        // "[{\"colorPrimary\":\"#FFFFFF\",
+        // \"colorPrimaryDark\":\"#FFFFFF\",
+        // \"colorBackgroundText\":\"#000000\",
+        // \"colorBackground\":\"#FFFFFF\",
+        // \"colorButton\":\"#2196F3\",
+        // \"shadow\":\"1\",
+        // \"colorHint\":\"#2196F3\",
+        // \"colorRipple\":\"#2196F3\",
+        // \"colorPrimaryCardImage\":\"#000000\",
+        // \"version\":\"2\",
+        // \"colorPrimaryText\":\"#000000\",
+        // \"colorPrimaryImage\":\"#000000\",
+        // \"colorBackgroundImage\":\"#2196F3\",
+        // \"colorBackgroundCardText\":\"#000000\",
+        // \"statusbarIcon\":\"0\",
+        // \"colorBackgroundCard\":\"#FFFFFF\",
+        // \"colorButtonText\":\"#FFFFFF\",
+        // \"colorPrimaryCardText\":\"#000000\",
+        // \"colorPrimaryCard\":\"#FFFFFF\",
+        // \"colorBackgroundCardImage\":\"#000000\"}]"
 
-      function zoom(id) {
-        if (zoomed === id) {
-          zoomed = null;
-          document.getElementById('box-image-' + id).classList.remove('zoom');
+        function Theme(author, title, info, user_uid, theme_data, osthm_version) {
+          this.author = new User(author, user_uid);
+          this.title = title;
+          this.info = info;
+          this.osthm_version = osthm_version;
+          this.theme_data = theme_data;
+        }
+
+        async function getThemes() {
+          return await fetch(
+            "https://teammusic-tw.firebaseio.com/upload/themes.json"
+          )
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              var themes = [];
+              for (key in data) {
+                let current_data = data[key];
+                let theme_data = JSON.parse(current_data["themesjson"]);
+                themes.push(
+                  new Theme(
+                    current_data["themesauthor"],
+                    current_data["themesname"],
+                    current_data["themesinfo"],
+                    current_data["uid"],
+                    theme_data,
+                    current_data["os-thm-version"]
+                  )
+                );
+              }
+              return themes;
+            });
+          }
+
+          var crossData;
+
+        getThemes().then((data) => {
+          var mainContainer = document.getElementById("root");
+          crossData = data;
+          for (var i = 0; i < data.length; i++) {
+            var div = document.createElement("div");
+            div.innerHTML = '<div class="box" style="margin: 20px; padding: 10px; width: 250px;">' +
+              '<span id="box-image-'+ i +'" style="display: flex;  text-align: center; justify-content: flex-start; align-items: center;">' +
+                '<img onClick="zoom(' + i + ')"  class="box-image" style="border-radius: 15px;" src="./box-image.png" width="100px"  />' +
+                '<p class="title" style="margin-left: 15px;">'+ data[i].title +'</p>' +
+              '</span>' +
+              '<p class="description">'+ data[i].info +'</p>' +
+              '<p class="version">Version: '+ data[i].osthm_version +'</p>' +
+              '<div onClick="select(' + i  + ')" class="box" style="cursor: pointer;">Select this</p>' +
+            '</div>';
+            mainContainer.appendChild(div);
+            setTimeout(() => {
+              document.getElementById('root').classList.remove('display-none');
+              document.getElementById('spinner').classList.add('display-none');
+            }, 1)          
+          }
+        });
+
+        var zoomed;
+
+        function zoom(id) {
+          if (zoomed === id) {
+            zoomed = null;
+            document.getElementById('box-image-' + id).classList.remove('zoom');
+            
+          } else {
+            zoomed = id;
+            document.getElementById('box-image-' + id).classList.add('zoom');
+          }
           
-        } else {
-          zoomed = id;
-          document.getElementById('box-image-' + id).classList.add('zoom');
         }
-        
-      }
-     
-    </script>
-  </body>
-</html>
+
+        function select(id) {
+          console.log(crossData[id].theme_data)
+          document.getElementById('button').setAttribute('style', 'background-color: ' + JSON.stringify(crossData[id].theme_data).colorButton);
+          
+        }
+      
+      </script>
+    </body>
+  </html>
