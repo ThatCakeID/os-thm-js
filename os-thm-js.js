@@ -58,6 +58,8 @@ function User(username, uid) {
     this.theme_data = theme_data;
   }
 
+  var CrossData;
+
   async function getThemes() {
     return await fetch(
       "https://teammusic-tw.firebaseio.com/upload/themes.json"
@@ -81,6 +83,37 @@ function User(username, uid) {
             )
           );
         }
+        CrossData = themes;
         return themes;
       });
+    }
+
+    function selectTheme(id) {
+      try {
+        localStorage.setItem('theme', JSON.stringify(CrossData[id]));
+      } catch (error) {
+        alert(error);
+        return error;
+      }
+      alert('Succesfully')
+    }
+
+    function setTextColor(ElementId) {
+      document.getElementById(ElementId).style.color = JSON.parse(localStorage.getItem('theme')).theme_data[0].colorBackgroundText;
+    }
+
+    function setBackgroundColor(ElementId) {
+      document.getElementById(ElementId).style.background = JSON.parse(localStorage.getItem('theme')).theme_data[0].colorBackground;
+    }
+
+    function setBarLightColor(ElementId) {
+      document.getElementById(ElementId).style.background = JSON.parse(localStorage.getItem('theme')).theme_data[0].colorPrimary;
+    }
+
+    function setBarDarkColor(ElementId) {
+      document.getElementById(ElementId).style.background = JSON.parse(localStorage.getItem('theme')).theme_data[0].colorPrimaryDark;
+    }
+
+    function setCardColor(ElementId) {
+      document.getElementById(ElementId).style.background = JSON.parse(localStorage.getItem('theme')).theme_data[0].colorPrimaryCardTint;
     }

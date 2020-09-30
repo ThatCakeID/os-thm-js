@@ -71,108 +71,23 @@
         <svg style="margin-top: 20px;" class="spinner" id="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
           <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
         </svg>
+      <button onclick="apply()">Apply current theme</button>
       <div style="margin-top: 20px;" class="display-none" id="root"></div>
       <div class="preview">
         <h5>
           Preview:
         </h5>
-        <button id="button">Button</button>
-        <button id="button">Button</button>
+        <div id="barlight" style="width: 350%; padding: 25%;"> PREVIEW BAR LIGHT </div>
+        <div id="bardark" style="width: 350%; padding: 25%;"> PREVIEW BAR DARK </div>
+        <div id="card" style="box-shadow: 2px 2px 2px 2px gray; border: black solid 1px; width: 200%; padding: 50%;"> PREVIEW CARD </div>
+        <button id="button">PREVIEW BACKGROUND</button>
+        <button id="button1">PREVIEW TEXT COLOR</button>
       </div>
+      <script src="../os-thm-js.js"></script>
       <script>
-
-        function User(username, uid) {
-          this.username = username;
-          this.uid = uid;
-        }
-
-        // function ThemeData( colorPrimary, colorPrimaryDark, colorBackgroundText, colorBackground,
-        //                     colorButton, shadow, colorHint, colorRipple, colorPrimaryCardImage,
-        //                     version, colorPrimaryText, colorPrimaryImage, colorBackgroundImage,
-        //                     colorBackgroundCardText, statusbarIcon, colorBackgroundCard, colorButtonText,
-        //                     colorPrimaryCardText, colorPrimaryCard, colorBackgroundCardImage) {
-        //     this.colorPrimary = colorPrimary;
-        //     this.colorPrimaryDark = colorPrimaryDark;
-        //     this.colorBackgroundText = colorBackgroundText;
-        //     this.colorBackground = colorBackground;
-        //     this.colorButton = colorButton;
-        //     this.shadow = shadow;
-        //     this.colorHint = colorHint;
-        //     this.colorRipple = colorRipple;
-        //     this.colorPrimaryCardImage = colorPrimaryCardImage;
-        //     this.version = version;
-        //     this.colorPrimaryText = colorPrimaryText;
-        //     this.colorPrimaryImage = colorPrimaryImage;
-        //     this.colorBackgroundImage = colorBackgroundImage;
-        //     this.colorBackgroundCardText = colorBackgroundCardText;
-        //     this.statusbarIcon = statusbarIcon;
-        //     this.colorBackgroundCard = colorBackgroundCard;
-        //     this.colorButtonText = colorButtonText;
-        //     this.colorPrimaryCardText = colorPrimaryCardText;
-        //     this.colorPrimaryCard = colorPrimaryCard;
-        //     this.colorBackgroundCardImage = colorBackgroundCardImage;
-        // }
-        // "[{\"colorPrimary\":\"#FFFFFF\",
-        // \"colorPrimaryDark\":\"#FFFFFF\",
-        // \"colorBackgroundText\":\"#000000\",
-        // \"colorBackground\":\"#FFFFFF\",
-        // \"colorButton\":\"#2196F3\",
-        // \"shadow\":\"1\",
-        // \"colorHint\":\"#2196F3\",
-        // \"colorRipple\":\"#2196F3\",
-        // \"colorPrimaryCardImage\":\"#000000\",
-        // \"version\":\"2\",
-        // \"colorPrimaryText\":\"#000000\",
-        // \"colorPrimaryImage\":\"#000000\",
-        // \"colorBackgroundImage\":\"#2196F3\",
-        // \"colorBackgroundCardText\":\"#000000\",
-        // \"statusbarIcon\":\"0\",
-        // \"colorBackgroundCard\":\"#FFFFFF\",
-        // \"colorButtonText\":\"#FFFFFF\",
-        // \"colorPrimaryCardText\":\"#000000\",
-        // \"colorPrimaryCard\":\"#FFFFFF\",
-        // \"colorBackgroundCardImage\":\"#000000\"}]"
-
-        function Theme(author, title, info, user_uid, theme_data, osthm_version) {
-          this.author = new User(author, user_uid);
-          this.title = title;
-          this.info = info;
-          this.osthm_version = osthm_version;
-          this.theme_data = theme_data;
-        }
-
-        async function getThemes() {
-          return await fetch(
-            "https://teammusic-tw.firebaseio.com/upload/themes.json"
-          )
-            .then((response) => {
-              return response.json();
-            })
-            .then((data) => {
-              var themes = [];
-              for (key in data) {
-                let current_data = data[key];
-                let theme_data = JSON.parse(current_data["themesjson"]);
-                themes.push(
-                  new Theme(
-                    current_data["themesauthor"],
-                    current_data["themesname"],
-                    current_data["themesinfo"],
-                    current_data["uid"],
-                    theme_data,
-                    current_data["os-thm-version"]
-                  )
-                );
-              }
-              return themes;
-            });
-          }
-
-          var crossData;
 
         getThemes().then((data) => {
           var mainContainer = document.getElementById("root");
-          crossData = data;
           for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
             div.innerHTML = '<div class="box" style="margin: 20px; padding: 10px; width: 250px;">' +
@@ -182,7 +97,7 @@
               '</span>' +
               '<p class="description">'+ data[i].info +'</p>' +
               '<p class="version">Version: '+ data[i].osthm_version +'</p>' +
-              '<div onClick="select(' + i  + ')" class="box" style="cursor: pointer;">Select this</p>' +
+              '<div onClick="selectTheme(' + i + ')" class="box" style="cursor: pointer;">Select this</p>' +
             '</div>';
             mainContainer.appendChild(div);
             setTimeout(() => {
@@ -206,9 +121,12 @@
           
         }
 
-        function select(id) {
-          console.log(crossData[id].theme_data)
-          document.getElementById('button').setAttribute('style', 'background-color: ' + JSON.stringify(crossData[id].theme_data).colorButton);         
+        function apply() {
+          setTextColor('button1');
+          setBackgroundColor('button'); 
+          setBarLightColor('barlight');
+          setBarDarkColor('bardark');
+          setCardColor('card');
         }
       
       </script>
