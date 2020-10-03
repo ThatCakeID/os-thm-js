@@ -22,13 +22,19 @@ os-thm (stands for: opensource-theme) is a piece of software that can manage, ed
 
        <script src="./os-thm-js.js"></script>
 
-2. then get and select themes with:
+2. Initialize os-thm with:
+
+        <script>
+                InitializeTheme();
+        </script>
+
+3. get and select themes with:
 
         getThemes().then((data) => {
             selectTheme(ThemeId);
         });
     
-3. apply colors to elements:
+4. apply colors to elements:
 
         setTextColor('button');
         setBackgroundColor('button'); 
