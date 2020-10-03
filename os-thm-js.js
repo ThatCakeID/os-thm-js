@@ -76,9 +76,8 @@ function User(username, uid) {
   var CrossData;
 
   async function getThemes() {
-    if (!initialized) {
-      console.log('os-thm-js ' + version + ': os-thm not initialized :(');
-      return(false);
+    if (!initialized) {  
+      return(console.log('os-thm-js ' + version + ': os-thm not initialized :('));
     }
     return await fetch(
       "https://teammusic-tw.firebaseio.com/upload/themes.json"
@@ -109,8 +108,7 @@ function User(username, uid) {
 
     function selectTheme(id) {
       if (!initialized) {
-        console.log('os-thm-js ' + version + ': os-thm not initialized :(');
-        return(false);
+        return(console.log('os-thm-js ' + version + ': os-thm not initialized :('));
       }
       try {
         localStorage.setItem('theme', JSON.stringify(CrossData[id]));
@@ -123,40 +121,35 @@ function User(username, uid) {
 
     function setTextColor(ElementId) {
       if (!initialized) {
-        console.log('os-thm-js ' + version + ': os-thm not initialized :(');
-        return(false);
+        return(console.log('os-thm-js ' + version + ': os-thm not initialized :('));
       }
       document.getElementById(ElementId).style.color = JSON.parse(localStorage.getItem('theme')).theme_data[0].colorBackgroundText;
     }
 
     function setBackgroundColor(ElementId) {
       if (!initialized) {
-        console.log('os-thm-js ' + version + ': os-thm not initialized :(');
-        return(false);
+        return(console.log('os-thm-js ' + version + ': os-thm not initialized :('));
       }
       document.getElementById(ElementId).style.background = JSON.parse(localStorage.getItem('theme')).theme_data[0].colorBackground;
     }
 
     function setBarLightColor(ElementId) {
       if (!initialized) {
-        console.log('os-thm-js ' + version + ': os-thm not initialized :(');
-        return(false);
+        return(console.log('os-thm-js ' + version + ': os-thm not initialized :('));
       }
       document.getElementById(ElementId).style.background = JSON.parse(localStorage.getItem('theme')).theme_data[0].colorPrimary;
     }
 
     function setBarDarkColor(ElementId) {
       if (!initialized) {
-        console.log('os-thm-js ' + version + ': os-thm not initialized :(');
-        return(false);
+        return(console.log('os-thm-js ' + version + ': os-thm not initialized :('));
       }
       document.getElementById(ElementId).style.background = JSON.parse(localStorage.getItem('theme')).theme_data[0].colorPrimaryDark;
     }
 
     function setCardColor(ElementId) {
       if (!initialized) {
-        console.log('os-thm-js ' + version + ': os-thm not initialized :(');
-        return(false);
+        return(console.log('os-thm-js ' + version + ': os-thm not initialized :('));
       }
       document.getElementById(ElementId).style.background = JSON.parse(localStorage.getItem('theme')).theme_data[0].colorPrimaryCardTint;
     }
