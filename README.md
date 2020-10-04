@@ -1,5 +1,5 @@
 # OS-THM JS
-Current version: 0.1-alpha
+Current version: 0.2-alpha
 
 os-thm (stands for: opensource-theme) is a piece of software that can manage, edit, import, export or remove theme. One of the os-thm's key feature is that the theme can be applied globally, means the theme can used by apps that have implemented os-thm. os-thm is intended to be open-source, rich, and easy to use.
 
