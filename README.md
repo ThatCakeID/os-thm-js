@@ -9,6 +9,8 @@ os-thm (stands for: opensource-theme) is a piece of software that can manage, ed
 
 1. import os-thm-js.js with:
 
+      Minimal version is coming soon stay tuned! Join to the **[Discord server](https://thatcakeid.com/discord)**. 
+
       - use the stable version with:
 
        <script src="https://os-thm.thatcakeid.com/releases/latest/os-thm-js.js"></script>
@@ -17,18 +19,23 @@ os-thm (stands for: opensource-theme) is a piece of software that can manage, ed
     
        <script src="https://raw.githubusercontent.com/ThatCakeID/os-thm-js/dev/os-thm-js.js"></script>
        
-      - use stable or beta version (local) with:
-        * You need to download the js file from http://os-thm.thatcakeid.com
-
+      - use stable or beta version (local) with:    
+      
        <script src="./os-thm-js.js"></script>
+       
+      You need to download the js file from http://os-thm.thatcakeid.com
+       
+2. initialize os-thm with:
 
-2. then get and select themes with:
+            InitializeTheme();
+
+3. get and select themes with:
 
         getThemes().then((data) => {
             selectTheme(ThemeId);
         });
     
-3. apply colors to elements:
+4. apply colors to elements:
 
         setTextColor('button');
         setBackgroundColor('button'); 
