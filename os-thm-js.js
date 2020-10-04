@@ -83,6 +83,7 @@ async function getThemes() {
             "os-thm-js " + version + ": os-thm not initialized :("
         );
     }
+    // Temporary API
     return await fetch("https://teammusic-tw.firebaseio.com/upload/themes.json")
         .then((response) => {
             return response.json();
@@ -121,6 +122,59 @@ function selectTheme(id) {
         return error;
     }
     alert("Succesfully");
+}
+
+function applyClasses() {
+    body = document.getElementsByTagName('body')[0];
+    body.style.background = JSON.parse(localStorage.getItem("theme")).theme_data[0].colorBackground;
+
+    themejson = JSON.parse(localStorage.getItem("theme")).theme_data[0];
+
+    text_color          =   themejson.colorBackgroundText;
+    colorBackground     =   themejson.colorBackground;
+    colorPrimary        =   themejson.colorPrimary;
+    colorPrimaryDark    =   themejson.colorPrimaryDark;
+    colorAccent         =   themejson.colorAccent;
+    colorAccentText     =   themejson.colorAccentText;
+    shadow              =   themejson.shadow;
+
+    var style = document.createElement('style');
+    style.innerHTML = 
+    `
+    body {
+        background-color: ` + colorBackground + `;
+    }
+
+    .text, .txt {
+        color: ` + text_color + `;
+    }
+    
+    .primary-color, .p-color, .p-c {
+        color: ` + colorPrimary + `;
+    }
+
+    .primary-bg, .primary-background, .p-bg {
+        background-color: ` + colorPrimary + `;
+    }
+    
+    .primary-dark-color, .pd-c, .pd-color {
+        color: ` + colorPrimaryDark + `;
+    }
+    
+    .accent-color, .accent-c, .a-c {
+        color: ` + colorAccent + `;
+    }
+
+    .accent-background, .accent-bg, .a-bg {
+        background-color: ` + colorAccent + `;
+    }
+    
+    .osthm-button, ot-btn {
+        background-color: ` + colorAccent `;
+        color: ` + colorAccentText + `;
+    }
+    `;
+    document.getElementsByTagName('head')[0].appendChild(style);
 }
 
 function setTextColor(ElementId) {
