@@ -27,7 +27,7 @@ os-thm (stands for: opensource-theme) is a piece of software that can manage, ed
        
 2. initialize os-thm with:
 
-            InitializeTheme();
+        InitializeTheme();
 
 3. get and select themes with:
 
