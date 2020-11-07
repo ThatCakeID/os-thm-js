@@ -190,3 +190,5 @@ function setCardColor(ElementId) {
             .colorPrimaryCardTint
     );
 }
+
+function CreateTheme(barlight, bardark, card, btnback, text) {}

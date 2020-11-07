@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>os-thm example</title>
+    <link rel="stylesheet" href="./spinner.css">
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Ubuntu", sans-serif;
+      user-select: none;
+      transition: all 0.2s linear;
+    }
+
+    html {
+      width: 100%;
+      height: 100%;
+    }
+
+    .box {
+      box-shadow: 2px 2px 3px 4px rgb(219, 219, 219);
+      margin: 1px;
+      padding: 5px;
+      width: fit-content;
+      border-radius: 10px;
+      max-width: 400px;
+      min-width: 100px;
+    }
+
+    .title {
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .version {
+      font-weight: 300;
+      font-size: 15px;
+    }
+
+    .description {
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    .display-none {
+      display: none;
+    }
+
+    .box-image {
+      cursor: zoom-in;
+    }
+
+    .zoom {
+      flex-direction: column;
+    }
+
+    .zoom img {
+      width: 100%!important;
+      cursor: zoom-out!important;
+      border-radius: 0!important;
+    }
+  </style>
+  <body style="margin-top: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+      <span class="box"><h1>CREATE THEME</h1></span>
+      <div class="sidebar">
+        <input id="lbchosser" type="color" placeholder="Pick A Light Bar Color" >
+        <input id="dbchosser" type="color" placeholder="Pick A Dark Bar Color" >
+        <input id="cchosser" type="color" placeholder="Pick A Card Color" >
+        <input id="bgchosser" type="color" placeholder="Pick A Background Color" >
+        <input id="textchosser" type="color" placeholder="Pick A Text Color" >
+        <button onclick="apply()">APPLY</button>
+        <button onclick="create()">CREATE</button>
+      </div>
+      <div>
+        <div id="barlight" style="width: 350%; padding: 25%;"> PREVIEW BAR LIGHT </div>
+        <div id="bardark" style="width: 350%; padding: 25%;"> PREVIEW BAR DARK </div>
+        <div id="card" style="box-shadow: 2px 2px 2px 2px gray; border: black solid 1px; width: 200%; padding: 50%;"> PREVIEW CARD </div>
+        <button id="button">PREVIEW BACKGROUND</button>
+        <button id="button1">PREVIEW TEXT COLOR</button>
+      </div>
+    </div>
+    <script src="../os-thm-js.js"></script>
+    <script>
+
+      InitializeTheme();
+
+      function apply() {
+        document.getElementById('barlight').style.background = document.getElementById('lbchosser').value;
+        document.getElementById('bardark').style.background = document.getElementById('dbchosser').value;
+        document.getElementById('card').style.background = document.getElementById('cchosser').value;
+        document.getElementById('button1').style.color = document.getElementById('textchosser').value;
+        document.getElementById('button').style.background = document.getElementById('bgchosser').value;
+      }
+    
+    </script>
+  </body>
+</html>
