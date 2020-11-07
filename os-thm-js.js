@@ -100,7 +100,7 @@ async function getThemes() {
         })
         .then((data) => {
             var themes = [];
-            for (key in data) {
+            for (key in data.data) {
                 console.log(JSON.parse(localStorage.getItem("theme")));
                 let current_data = data.data[0];
                 let theme_data = JSON.parse(current_data["themesjson"]);
